@@ -1,7 +1,7 @@
 import httpClient from '../http-common';
 
-const getAll = () => {
-  return httpClient.get('/notes');
-};
+const getAll = () => httpClient.get('/notes');
 
-export default { getAll };
+const createNote = data => httpClient.post('/notes', data);
+
+export default { getAll, createNote };

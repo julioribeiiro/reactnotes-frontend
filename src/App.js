@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import AddNote from './components/AddNote';
 import NavBar from './components/NavBar';
 import NotesList from './components/NotesList';
 import NotFound from './components/NotFound';
@@ -11,6 +12,7 @@ function App() {
         <div>
           <Switch>
             <Route exact path="/" component={NotesList} />
+            <Route path="/add" component={AddNote} />
             <Route path="*" component={NotFound} />
           </Switch>
         </div>

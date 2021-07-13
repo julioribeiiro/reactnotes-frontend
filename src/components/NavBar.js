@@ -8,7 +8,7 @@ const NavBar = () => (
       <Nav.Link as={Link} to="/">
         Home
       </Nav.Link>
-      <Nav.Link as={Link} to="asd">
+      <Nav.Link as={Link} to="/add">
         New Note
       </Nav.Link>
     </Nav>
