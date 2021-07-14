@@ -41,6 +41,7 @@ a p {
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
+  width: 100%;
 }
 
 /* notes list */
@@ -64,8 +65,4 @@ a p {
   font-size: 14px;
 }
 
-/* create note form */
-.create {
-  max-width: 400px;
-  margin: 20px auto;
-}
+
