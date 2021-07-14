@@ -1,9 +1,12 @@
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { Button } from '@material-ui/core';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import NotesServices from '../services/NotesServices';
 
 const NoteDetails = () => {
+  const history = useHistory();
+
   const { id } = useParams();
 
   const [currentNote, setCurrentNote] = useState('');
@@ -18,6 +21,17 @@ const NoteDetails = () => {
       });
   });
 
+  const deleteNote = e => {
+    e.preventDefault();
+    NotesServices.deleteNote(id)
+      .then(() => {
+        history.push('/');
+      })
+      .catch(error => {
+        console.log('Something went wrong', error);
+      });
+  };
+
   return (
     <div className="note-details main-content">
       <article>
@@ -27,6 +41,14 @@ const NoteDetails = () => {
           <span className="text-capitalize">, {currentNote.category}</span>
         </div>
         <div className="mb-3">{currentNote.body}</div>
+        <Button
+          variant="contained"
+          color="secondary"
+          margin="normal"
+          onClick={e => deleteNote(e)}
+        >
+          Delete
+        </Button>
       </article>
     </div>
   );
