@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
 import NotesServices from '../services/NotesServices';
 
@@ -27,7 +28,9 @@ const NotesList = () => {
             <div key={note.id} className="notes-preview mt-3">
               <Link to={`/notes/${note.id}`}>
                 <h5 className="primary-color text-capitalize">{note.title}</h5>
-                <p>{note.body}</p>
+                <Moment fromNow className="moment text-italic">
+                  {note.updatedAt}
+                </Moment>
               </Link>
             </div>
           ))}

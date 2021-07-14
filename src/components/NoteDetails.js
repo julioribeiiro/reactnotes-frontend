@@ -1,5 +1,6 @@
 import { Button } from '@material-ui/core';
 import { useEffect, useState } from 'react';
+import Moment from 'react-moment';
 import { useParams } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import NotesServices from '../services/NotesServices';
@@ -34,22 +35,26 @@ const NoteDetails = () => {
 
   return (
     <div className="note-details main-content">
-      <article>
-        <h5 className="text-capitalize">{currentNote.title}</h5>
-        <div className="mb-3 font-italic metadata">
-          <span>{currentNote.updatedAt}</span>
-          <span className="text-capitalize">, {currentNote.category}</span>
+      {currentNote && (
+        <div>
+          <article>
+            <h5 className="text-capitalize">{currentNote.title}</h5>
+            <div className="mb-3 font-italic metadata">
+              <Moment fromNow>{currentNote.updatedAt}</Moment>
+              <span className="text-capitalize">, {currentNote.category}</span>
+            </div>
+            <div className="mb-3">{currentNote.body}</div>
+            <Button
+              variant="contained"
+              color="secondary"
+              margin="normal"
+              onClick={e => deleteNote(e)}
+            >
+              Delete
+            </Button>
+          </article>
         </div>
-        <div className="mb-3">{currentNote.body}</div>
-        <Button
-          variant="contained"
-          color="secondary"
-          margin="normal"
-          onClick={e => deleteNote(e)}
-        >
-          Delete
-        </Button>
-      </article>
+      )}
     </div>
   );
 };

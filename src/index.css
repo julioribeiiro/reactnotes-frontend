@@ -60,6 +60,10 @@ a p {
   text-decoration: none;
 }
 
+.moment {
+  color: #333;
+}
+
 /* note details */
 .note-details .metadata {
   font-size: 14px;
