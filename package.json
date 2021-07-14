@@ -2,14 +2,19 @@
   "name": "reactfrontend",
   "version": "0.1.0",
   "private": true,
-  "engines": { "node": "14.17.3",
-  "npm": "7.19.1"},
+  "engines": {
+    "node": "14.17.3",
+    "npm": "7.19.1"
+  },
   "dependencies": {
+    "@fontsource/roboto": "^4.5.0",
+    "@material-ui/core": "^4.12.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
+    "formik": "^2.2.9",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.1",
     "react-dom": "^17.0.2",

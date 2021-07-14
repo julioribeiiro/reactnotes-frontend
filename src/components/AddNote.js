@@ -1,12 +1,32 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import NotesServices from '../services/NotesServices';
+import { TextField, Typography, MenuItem, Button } from '@material-ui/core';
 
 const AddNote = () => {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [category, setCategory] = useState('programming');
   const history = useHistory();
+
+  const categories = [
+    {
+      value: 'programming',
+      label: 'Programming',
+    },
+    {
+      value: 'vacation',
+      label: 'Vacation',
+    },
+    {
+      value: 'meeting',
+      label: 'Meeting',
+    },
+    {
+      value: 'blogging',
+      label: 'Blogging',
+    },
+  ];
 
   const saveNote = e => {
     e.preventDefault();
@@ -18,46 +38,53 @@ const AddNote = () => {
 
   return (
     <div className="create">
+      <Typography variant="h5" component="h2" color="textSecondary">
+        Creating New Note
+      </Typography>
       <form>
-        <div className="form-group">
-          <label htmlFor="title">
-            Note Title: <sup>*</sup>
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="title"
+        <div className="main-content-add">
+          <TextField
+            label="Note Title"
+            color="primary"
+            variant="outlined"
             value={title}
             onChange={e => setTitle(e.target.value)}
+            margin="normal"
           />
-        </div>
-        <div className="form-group">
-          <label htmlFor="body">
-            Note Description: <sup>*</sup>
-          </label>
-          <textarea
-            id="body"
-            className="form-control"
+          <br />
+          <TextField
+            label="Note Description"
+            color="primary"
+            multiline
+            rows={4}
+            variant="outlined"
             value={body}
             onChange={e => setBody(e.target.value)}
-          ></textarea>
-        </div>
-        <div className="form-group">
-          <label htmlFor="category">Note Category:</label>
-          <select
-            id="category"
-            className="form-control"
+            margin="normal"
+          />
+          <TextField
+            id="standard-select-currency"
+            select
+            label="Select"
             value={category}
+            variant="outlined"
+            margin="normal"
             onChange={e => setCategory(e.target.value)}
+            helperText="Please select the category of your note."
           >
-            <option value="programming">Programming</option>
-            <option value="vacation">Vacation</option>
-            <option value="meeting">Meeting</option>
-            <option value="blogging">Blogging</option>
-          </select>
-        </div>
-        <div className="text-center">
-          <button onClick={e => saveNote(e)}>Add note</button>
+            {categories.map(option => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+          <Button
+            variant="contained"
+            onClick={e => saveNote(e)}
+            margin="normal"
+          >
+            Add Note
+          </Button>
         </div>
       </form>
     </div>

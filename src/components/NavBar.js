@@ -1,18 +1,18 @@
 import { Link } from 'react-router-dom';
-import { Navbar, Nav } from 'react-bootstrap';
+import { AppBar, Toolbar, Typography } from '@material-ui/core';
 
 const NavBar = () => (
-  <Navbar bg="light" expand="lg" className="navbar justify-content-between">
-    <Navbar.Brand href="/">Notes App</Navbar.Brand>
-    <Nav style={{ maxHeight: '100px' }} navbarScroll>
-      <Nav.Link as={Link} to="/">
-        Home
-      </Nav.Link>
-      <Nav.Link as={Link} to="/add">
-        New Note
-      </Nav.Link>
-    </Nav>
-  </Navbar>
+  <AppBar position="static" className="navbar">
+    <Toolbar variant="dense">
+      <Typography variant="h6" className="white-color">
+        <b>Notes App</b>
+      </Typography>
+      <div>
+        <Link to="/">Home</Link>
+        <Link to="/add">New Note</Link>
+      </div>
+    </Toolbar>
+  </AppBar>
 );
 
 export default NavBar;
