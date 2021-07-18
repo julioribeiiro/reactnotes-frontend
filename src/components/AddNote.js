@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useParams } from 'react-router';
 import NotesServices from '../services/NotesServices';
 import { TextField, Typography, MenuItem, Button } from '@material-ui/core';
+import { useEffect } from 'react';
 
 const AddNote = () => {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [category, setCategory] = useState('programming');
   const history = useHistory();
+  const { id } = useParams();
 
   const categories = [
     {
@@ -30,16 +33,41 @@ const AddNote = () => {
 
   const saveNote = e => {
     e.preventDefault();
-    const note = { title, body, category };
-    NotesServices.createNote(note)
-      .then(() => history.push('/'))
-      .catch(error => console.log('Something went wrong', error));
+    const note = { id, title, body, category };
+    if (id) {
+      NotesServices.updateNote(note)
+        .then(() => history.push('/'))
+        .catch(error => console.log('Something went wrong', error));
+    } else {
+      NotesServices.createNote(note)
+        .then(() => history.push('/'))
+        .catch(error => console.log('Something went wrong', error));
+    }
   };
+
+  useEffect(() => {
+    if (id) {
+      NotesServices.getNote(id)
+        .then(response => {
+          setTitle(response.data.title);
+          setBody(response.data.body);
+          setCategory(response.data.category);
+        })
+        .catch(error => {
+          console.log('Something went wrong', error);
+        });
+    }
+  }, []);
 
   return (
     <div className="main-content">
-      <Typography variant="h5" component="h2" color="textSecondary">
-        Creating New Note
+      <Typography
+        variant="h5"
+        component="h2"
+        color="textSecondary"
+        className="text-center"
+      >
+        {id ? 'Update Note' : 'Create New Note'}
       </Typography>
       <form className="main-content-add">
         <TextField
@@ -77,8 +105,13 @@ const AddNote = () => {
             </MenuItem>
           ))}
         </TextField>
-        <Button variant="contained" onClick={e => saveNote(e)} margin="normal">
-          Add Note
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={e => saveNote(e)}
+          margin="normal"
+        >
+          {id ? 'Update Note' : 'Add Note'}
         </Button>
       </form>
     </div>

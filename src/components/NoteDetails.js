@@ -22,8 +22,7 @@ const NoteDetails = () => {
       });
   });
 
-  const deleteNote = e => {
-    e.preventDefault();
+  const handleDelete = () => {
     NotesServices.deleteNote(id)
       .then(() => {
         history.push('/');
@@ -31,6 +30,10 @@ const NoteDetails = () => {
       .catch(error => {
         console.log('Something went wrong', error);
       });
+  };
+
+  const handleEdit = () => {
+    history.push(`/notes/edit/${id}`);
   };
 
   return (
@@ -46,9 +49,18 @@ const NoteDetails = () => {
             <div className="mb-3">{currentNote.body}</div>
             <Button
               variant="contained"
+              color="primary"
+              margin="normal"
+              onClick={handleEdit}
+            >
+              Edit
+            </Button>
+            <Button
+              variant="contained"
               color="secondary"
               margin="normal"
-              onClick={e => deleteNote(e)}
+              className="ml-3"
+              onClick={handleDelete}
             >
               Delete
             </Button>

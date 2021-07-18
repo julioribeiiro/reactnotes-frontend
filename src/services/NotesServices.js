@@ -8,4 +8,6 @@ const getNote = id => httpClient.get(`/notes/${id}`);
 
 const deleteNote = id => httpClient.delete(`/notes/${id}`);
 
-export default { getAll, createNote, getNote, deleteNote };
+const updateNote = data => httpClient.put('/notes/edit', data);
+
+export default { getAll, createNote, getNote, deleteNote, updateNote };

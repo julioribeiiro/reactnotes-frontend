@@ -19,7 +19,7 @@ const NotesList = () => {
 
   return (
     <div className="main-content">
-      <h1>
+      <h1 className="text-center">
         <b>List of Notes</b>
       </h1>
       <div className="notes-list mt-4">
