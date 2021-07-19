@@ -9,6 +9,8 @@ const AddNote = () => {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [category, setCategory] = useState('programming');
+  const [errors, setErrors] = useState(false);
+
   const history = useHistory();
   const { id } = useParams();
 
@@ -33,6 +35,10 @@ const AddNote = () => {
 
   const saveNote = e => {
     e.preventDefault();
+    if (!title || !body) {
+      setErrors(true);
+      return;
+    }
     const note = { id, title, body, category };
     if (id) {
       NotesServices.updateNote(note)
@@ -69,11 +75,23 @@ const AddNote = () => {
       >
         {id ? 'Update Note' : 'Create New Note'}
       </Typography>
+      {errors && (
+        <Typography
+          style={{
+            color: 'red',
+            fontStyle: 'italic',
+            textAlign: 'center',
+          }}
+        >
+          Please enter the mandatory fields.
+        </Typography>
+      )}
       <form className="main-content-add">
         <TextField
           label="Note Title"
           color="primary"
           variant="outlined"
+          required
           value={title}
           onChange={e => setTitle(e.target.value)}
           margin="normal"
@@ -83,6 +101,7 @@ const AddNote = () => {
           label="Note Description"
           color="primary"
           multiline
+          required
           rows={4}
           variant="outlined"
           value={body}
